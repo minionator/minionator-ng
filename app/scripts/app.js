@@ -29,6 +29,11 @@ angular
         controller: 'TypeCtrl',
         controllerAs: 'type'
       })
+      .when('/:class/:type/:instance', {
+        templateUrl: 'views/instance.html',
+        controller: 'InstanceCtrl',
+        controllerAs: 'instance'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -9,7 +9,7 @@
       'fa-android': (slavetype.indexOf('-emulator') > 0 || slavetype === 'panda')}"></i>
     {{slavetype}}
   </h1>
-  <div ng-repeat="state in ['working', 'idle', 'broken', 'disabled', 'staging', 'decommissioned', 'not_in_slavealloc']" class="row">
+  <div ng-repeat="state in ['working', 'idle', 'broken', 'disabled', 'staging', 'decommissioned', 'not_in_slavealloc']" class="clearfix">
     <h2>
       <i class="fa" ng-class="{
         'fa-eraser': (state === 'decommissioned'),
