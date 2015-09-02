@@ -1,23 +1,52 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+
+<div class="row">
+  <div ng-repeat="(pool, stats) in summary" ng-show="pool !== 'metadata'" class="col-md-4">
+    <h2>{{pool}}</h2>
+    <ul class="list-unstyled">
+      <li ng-repeat="(class, counts) in stats">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span class="panel-title" ng-click="counts.show = !counts.show">
+              <i class="fa" ng-class="{
+                'fa-windows': (class.indexOf('-2008-') > 0 || class.indexOf('-w') > 0 || class.indexOf('-xp') > 0),
+                'fa-linux': (class.indexOf('-linux') > 0),
+                'fa-apple': (class.indexOf('-lion-') > 0 || class.indexOf('-snow-') > 0 || class.indexOf('-yosemite-') > 0),
+                'fa-android': (class.indexOf('-emulator') > 0 || class === 'panda')}"></i>
+              <strong>{{class}}</strong>
+            </span>
+            <button type="button" class="btn btn-xs btn-default pull-right" ng-click="counts.show = !counts.show">
+              <i class="fa" ng-class="{'fa-expand': !counts.show, 'fa-compress': counts.show}"></i>
+            </button>
+            <span ng-repeat="(name, count) in counts track by $index" title="{{name}}" ng-show="count && (name !== 'show')" style="margin-right: 4px;" class="label pull-right" ng-class="{
+              'label-success': (name === 'working'),
+              'label-warning': (name === 'disabled'),
+              'label-danger': (name === 'broken'),
+              'label-default': (['broken', 'disabled', 'working'].indexOf() < 0)}">
+              <i class="fa" ng-class="{
+                'fa-eraser': (name === 'decommissioned'),
+                'fa-cogs': (name === 'working'),
+                'fa-chain-broken': (name === 'not_in_slavealloc'),
+                'fa-wrench': (name === 'staging'),
+                'fa-stop': (name === 'disabled'),
+                'fa-frown-o': (name === 'broken')}"></i>
+              <span class="">{{count}}</span>
+            </span>
+          </div>
+          <div class="panel-body" ng-show="counts.show">
+            Panel content
+          </div>
+          <!--
+          <div class="panel-footer" ng-show="counts.show">
+          </div>
+          -->
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
+<div class="row text-right">
   <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
+    <i class="fa fa-camera"></i>
+    {{summary.metadata.generated | date:'yyyy-MM-dd HH:mm:ss Z'}} snapshot &nbsp;
   </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
 </div>
