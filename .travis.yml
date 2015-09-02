@@ -12,7 +12,7 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: ./publish.sh
+  script: "./publish.sh"
   on:
     branch: master
     condition: "$TRAVIS_PULL_REQUEST = false"
@@ -22,3 +22,4 @@ env:
   - GIT_EMAIL: travis.ci.build@gmail.com
   - GH_REF: github.com/minionator/minionator.github.io.git
   - GH_PAGES_BRANCH: master
+  - secure: QFB/+zQensi/GL3eNyqmeTbh/sy7ZXk5cQALFgLwm8KqnF8rSFE+VTS52g4zNop6i/FiYwYnmEynKOvBrKxMFI0HXMNgE0AN3DDrdFgRnZwAHqlMBRJpRmPDeD4W6HXyFy9mJLCC5s1r/K2TNaHeqqBY63lfr+hIhorl9guAEIYG6s5JUPTG3h8HFZpcnzO46Mg2WYdBwy/8RAnbhlq6ZEpCXAfvwXWEb23/rNmA2pNx8wj3D7pHYyI3iSCxKJ93mHS/ZcuEBwbt6VE/88vTpoVosg3LHKvy3kRq8sQ8UL0XXl+ritMI5ub7SLM+m5/N+wTPTiMAPoUDabdqiuDJARg8Aw/PdJEyD+ZqflYVam7ps1uUwp8naI0e/bVGdGqn98mfSZ9NuBmJ4mmpRRlPv7CvT6yNmd4itUw8G2UnayZDeYVV0sUTTeqS0qHosr4/W5oNTm2vvivlq//4TxQtqZnPGw2xJpURxL2sIWb+KL0BZY9GoBxIWcx3fQyfvfu+eh7JBknF9OYOecHNfgHovLTdxR4kPZsc71kr4orOPXRm4JHdtRWkkldF8vX2+IH++DX2mZL18R+YLNWnR1I6aJ7tArAiz39vNxzRREoJ79m45Uf9uFR7HPkSt93PM5Bl9WtzxUCI+9PKpfosgWIb9nnNm2SS6TUOqeARf4eN2UY=
