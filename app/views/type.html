@@ -1,5 +1,9 @@
-<div class="">
+<div>
   <h1>
+    <i class="fa" ng-class="{
+      'fa-wrench': (class === 'build'),
+      'fa-heartbeat': (class === 'test'),
+      'fa-balance-scale': (class === 'try')}"></i>
     {{class}}
     /
     <i class="fa" ng-class="{

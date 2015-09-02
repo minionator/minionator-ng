@@ -1,1 +1,21 @@
-<p>This is the instance view.</p>
+<div>
+  <h1>
+    <i class="fa" ng-class="{
+      'fa-wrench': (class === 'build'),
+      'fa-heartbeat': (class === 'test'),
+      'fa-balance-scale': (class === 'try')}"></i>
+    {{class}}
+    /
+    <i class="fa" ng-class="{
+      'fa-windows': (slavetype.indexOf('-2008-') > 0 || slavetype.indexOf('-w') > 0 || slavetype.indexOf('-xp') > 0),
+      'fa-linux': (slavetype.indexOf('-linux') > 0),
+      'fa-apple': (slavetype.indexOf('-lion-') > 0 || slavetype.indexOf('-snow-') > 0 || slavetype.indexOf('-yosemite-') > 0),
+      'fa-android': (slavetype.indexOf('-emulator') > 0 || slavetype === 'panda')}"></i>
+    {{slavetype}}
+    /
+    <i class="fa" ng-class="{
+      'fa-desktop': (slavetype.indexOf('-emulator') < 0 && slavetype !== 'panda'),
+      'fa-mobile': (slavetype.indexOf('-emulator') > 0 || slavetype === 'panda')}"></i>
+    {{instance}}
+  </h1>
+</div>

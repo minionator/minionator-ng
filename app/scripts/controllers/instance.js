@@ -8,10 +8,8 @@
  * Controller of the minionatorNgApp
  */
 angular.module('minionatorNgApp')
-  .controller('InstanceCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('InstanceCtrl', function ($scope, $routeParams) {
+    $scope.class = $routeParams.class;
+    $scope.slavetype = $routeParams.type;
+    $scope.instance = $routeParams.instance;
   });
