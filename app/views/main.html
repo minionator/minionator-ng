@@ -1,25 +1,26 @@
 
 <div class="row">
-  <div ng-repeat="(pool, stats) in summary" ng-show="pool !== 'metadata'" class="col-md-4">
-    <h2>{{pool}}</h2>
+  <div ng-repeat="(class, stats) in summary" ng-show="class !== 'metadata'" class="col-md-4">
+    <h2>{{class}}</h2>
     <ul class="list-unstyled">
-      <li ng-repeat="(class, counts) in stats">
+      <li ng-repeat="(type, counts) in stats">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <span class="panel-title" ng-click="counts.show = !counts.show">
+            <a class="panel-title" ng-href="#/{{class}}/{{type}}">
               <i class="fa" ng-class="{
-                'fa-windows': (class.indexOf('-2008-') > 0 || class.indexOf('-w') > 0 || class.indexOf('-xp') > 0),
-                'fa-linux': (class.indexOf('-linux') > 0),
-                'fa-apple': (class.indexOf('-lion-') > 0 || class.indexOf('-snow-') > 0 || class.indexOf('-yosemite-') > 0),
-                'fa-android': (class.indexOf('-emulator') > 0 || class === 'panda')}"></i>
-              <strong>{{class}}</strong>
-            </span>
+                'fa-windows': (type.indexOf('-2008-') > 0 || type.indexOf('-w') > 0 || type.indexOf('-xp') > 0),
+                'fa-linux': (type.indexOf('-linux') > 0),
+                'fa-apple': (type.indexOf('-lion-') > 0 || type.indexOf('-snow-') > 0 || type.indexOf('-yosemite-') > 0),
+                'fa-android': (type.indexOf('-emulator') > 0 || type === 'panda')}"></i>
+              <strong>{{type}}</strong>
+            </a>
             <button type="button" class="btn btn-xs btn-default pull-right" ng-click="counts.show = !counts.show">
               <i class="fa" ng-class="{'fa-expand': !counts.show, 'fa-compress': counts.show}"></i>
             </button>
             <span ng-repeat="(name, count) in counts track by $index" title="{{name}}" ng-show="count && (name !== 'show')" style="margin-right: 4px;" class="label pull-right" ng-class="{
               'label-success': (name === 'working'),
-              'label-warning': (name === 'disabled'),
+              'label-warning': (name === 'idle'),
+              'label-info': (name === 'disabled'),
               'label-danger': (name === 'broken'),
               'label-default': (['broken', 'disabled', 'working'].indexOf() < 0)}">
               <i class="fa" ng-class="{
@@ -28,6 +29,7 @@
                 'fa-chain-broken': (name === 'not_in_slavealloc'),
                 'fa-wrench': (name === 'staging'),
                 'fa-stop': (name === 'disabled'),
+                'fa-clock-o': (name === 'idle'),
                 'fa-frown-o': (name === 'broken')}"></i>
               <span class="">{{count}}</span>
             </span>

@@ -1,0 +1,77 @@
+<div class="">
+  <h1>
+    {{class}}
+    /
+    <i class="fa" ng-class="{
+      'fa-windows': (slavetype.indexOf('-2008-') > 0 || slavetype.indexOf('-w') > 0 || slavetype.indexOf('-xp') > 0),
+      'fa-linux': (slavetype.indexOf('-linux') > 0),
+      'fa-apple': (slavetype.indexOf('-lion-') > 0 || slavetype.indexOf('-snow-') > 0 || slavetype.indexOf('-yosemite-') > 0),
+      'fa-android': (slavetype.indexOf('-emulator') > 0 || slavetype === 'panda')}"></i>
+    {{slavetype}}
+  </h1>
+  <div ng-repeat="state in ['working', 'idle', 'broken', 'disabled', 'staging', 'decommissioned', 'not_in_slavealloc']" class="row">
+    <h2>
+      <i class="fa" ng-class="{
+        'fa-eraser': (state === 'decommissioned'),
+        'fa-cogs': (state === 'working'),
+        'fa-chain-broken': (state === 'not_in_slavealloc'),
+        'fa-wrench': (state === 'staging'),
+        'fa-stop': (state === 'disabled'),
+        'fa-clock-o': (state === 'idle'),
+        'fa-frown-o': (state === 'broken')}"></i>
+      {{state}}
+    </h2>
+    <div ng-repeat="(hostname, stats) in data" ng-show="stats.slave_state === state" class="col-md-3">
+      <div class="panel" ng-class="{
+        'panel-default': (state === 'decommissioned'),
+        'panel-success': (state === 'working'),
+        'panel-default': (state === 'not_in_slavealloc'),
+        'panel-default': (state === 'staging'),
+        'panel-info': (state === 'disabled'),
+        'panel-warning': (state === 'idle'),
+        'panel-danger': (state === 'broken')}">
+        <div class="panel-heading">
+          <a class="panel-title" ng-href="#/{{class}}/{{slavetype}}/{{hostname}}">
+            <strong>{{hostname}}</strong>
+          </a>
+          <button type="button" class="btn btn-xs btn-default pull-right" ng-click="stats.show = !stats.show">
+            <i class="fa" ng-class="{'fa-expand': !stats.show, 'fa-compress': stats.show}"></i>
+          </button>
+        <!--
+          <span ng-repeat="(name, count) in counts track by $index" title="{{name}}" ng-show="count && (name !== 'show')" style="margin-right: 4px;" class="label pull-right" ng-class="{
+            'label-success': (name === 'working'),
+            'label-warning': (name === 'disabled'),
+            'label-danger': (name === 'broken'),
+            'label-default': (['broken', 'disabled', 'working'].indexOf() < 0)}">
+            
+            <span class="">{{count}}</span>
+          </span>
+        -->
+        </div>
+        <div class="panel-body" ng-show="stats.show">
+          <div ng-show="stats.elapsed_on_job">
+            elapsed: {{stats.elapsed_on_job}}
+          </div>
+          <div ng-show="stats.elapsed_since_job">
+            time since last job: {{stats.elapsed_since_job}}
+          </div>
+          <div ng-show="stats.starttime">
+            start time: {{stats.starttime}}
+          </div>
+          <div ng-show="stats.master.indexOf('http://None') < 0" ng-bind-html="stats.master">
+          </div>
+          <div ng-show="stats.notes">
+            {{stats.notes}}
+          </div>
+        </div>
+        <!--
+        <div class="panel-footer" ng-show="counts.show">
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+<pre>{{data | json}}</pre>
+-->

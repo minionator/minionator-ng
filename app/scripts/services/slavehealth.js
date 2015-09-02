@@ -14,14 +14,15 @@ angular.module('minionatorNgApp')
     return $resource(
       apiUrl,
       {
-        id: '@_slaveclass'
+        classtype: '@_classtype'
       },
       {
         headers: {
           'Accept': 'application/json'
         },
-        get: {
-          url: apiUrl + '/:slaveclass.json'
+        classtype: {
+          url: apiUrl + '/:classtype.json',
+          isArray: false
         },
         query: {
           url: apiUrl + '/all_slaves.json',
