@@ -23,7 +23,7 @@
   <div class="text-center" ng-show="!data">
     <i class="fa fa-spinner fa-spin"></i>
   </div>
-  <div ng-repeat="state in ['working', 'idle', 'broken', 'disabled', 'staging', 'decommissioned', 'not_in_slavealloc']" class="clearfix" ng-show="data">
+  <div ng-repeat="(state, count) in states" class="clearfix" ng-show="data && count">
     <h2>
       <i class="fa" ng-class="{
         'fa-eraser': (state === 'decommissioned'),
