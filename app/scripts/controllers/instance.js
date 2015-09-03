@@ -11,5 +11,5 @@ angular.module('minionatorNgApp')
   .controller('InstanceCtrl', function ($scope, $routeParams) {
     $scope.class = $routeParams.class;
     $scope.slavetype = $routeParams.type;
-    $scope.instance = $routeParams.instance;
+    $scope.instanceName = $routeParams.instance;
   });

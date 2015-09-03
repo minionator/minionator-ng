@@ -1,21 +1,33 @@
-<div>
+<div class="text-center" ng-show="!instanceName">
+  <i class="fa fa-spinner fa-spin"></i>
+</div>
+<div ng-show="instanceName">
   <h1>
-    <i class="fa" ng-class="{
-      'fa-wrench': (class === 'build'),
-      'fa-heartbeat': (class === 'test'),
-      'fa-balance-scale': (class === 'try')}"></i>
-    {{class}}
+    <a ng-href="#/">
+      <i class="fa fa-heartbeat"></i>
+      dash
+    </a>
     /
-    <i class="fa" ng-class="{
-      'fa-windows': (slavetype.indexOf('-2008-') > 0 || slavetype.indexOf('-w') > 0 || slavetype.indexOf('-xp') > 0),
-      'fa-linux': (slavetype.indexOf('-linux') > 0),
-      'fa-apple': (slavetype.indexOf('-lion-') > 0 || slavetype.indexOf('-snow-') > 0 || slavetype.indexOf('-yosemite-') > 0),
-      'fa-android': (slavetype.indexOf('-emulator') > 0 || slavetype === 'panda')}"></i>
-    {{slavetype}}
+    <a ng-href="#/{{class}}">
+      <i class="fa" ng-class="{
+        'fa-wrench': (class === 'build'),
+        'fa-tachometer': (class === 'test'),
+        'fa-balance-scale': (class === 'try')}"></i>
+      {{class}}
+    </a>
+    /
+    <a ng-href="#/{{class}}/{{slavetype}}">
+      <i class="fa" ng-class="{
+        'fa-windows': (slavetype.indexOf('-2008-') > 0 || slavetype.indexOf('-w') > 0 || slavetype.indexOf('-xp') > 0),
+        'fa-linux': (slavetype.indexOf('-linux') > 0),
+        'fa-apple': (slavetype.indexOf('-lion-') > 0 || slavetype.indexOf('-snow-') > 0 || slavetype.indexOf('-yosemite-') > 0),
+        'fa-android': (slavetype.indexOf('-emulator') > 0 || slavetype === 'panda')}"></i>
+      {{slavetype}}
+    </a>
     /
     <i class="fa" ng-class="{
       'fa-desktop': (slavetype.indexOf('-emulator') < 0 && slavetype !== 'panda'),
       'fa-mobile': (slavetype.indexOf('-emulator') > 0 || slavetype === 'panda')}"></i>
-    {{instance}}
+    {{instanceName}}
   </h1>
 </div>

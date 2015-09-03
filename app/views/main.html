@@ -1,9 +1,31 @@
-
-<div class="row">
-  <div ng-repeat="(class, stats) in summary" ng-show="class !== 'metadata'" class="col-md-4">
-    <h2>{{class}}</h2>
+<div class="text-center" ng-show="!summary">
+  <i class="fa fa-spinner fa-spin"></i>
+</div>
+<div>
+  <div ng-repeat="(class, stats) in summary" ng-show="class !== 'metadata' && ((slaveclass === class) || !slaveclass)" ng-class="{'col-md-4': !slaveclass}">
+    <h2>
+      <a ng-href="#/" ng-show="slaveclass">
+        <i class="fa fa-heartbeat"></i>
+        dash
+      </a>
+      <span ng-show="slaveclass">/</span>
+      <a ng-href="#/{{class}}" ng-show="!slaveclass">
+        <i class="fa" ng-class="{
+          'fa-wrench': (class === 'build'),
+          'fa-tachometer': (class === 'test'),
+          'fa-balance-scale': (class === 'try')}"></i>
+        {{class}}
+      </a>
+      <span ng-show="slaveclass">
+        <i class="fa" ng-class="{
+          'fa-wrench': (class === 'build'),
+          'fa-tachometer': (class === 'test'),
+          'fa-balance-scale': (class === 'try')}"></i>
+        {{class}}
+      </span>
+    </h2>
     <ul class="list-unstyled">
-      <li ng-repeat="(type, counts) in stats">
+      <li ng-repeat="(type, counts) in stats" ng-show="counts.working||counts.idle||counts.disabled||counts.broken" ng-class="{'col-md-4': slaveclass}">
         <div class="panel panel-default">
           <div class="panel-heading">
             <a class="panel-title" ng-href="#/{{class}}/{{type}}">
@@ -27,7 +49,7 @@
                 'fa-eraser': (name === 'decommissioned'),
                 'fa-cogs': (name === 'working'),
                 'fa-chain-broken': (name === 'not_in_slavealloc'),
-                'fa-wrench': (name === 'staging'),
+                'fa-check-square-o': (name === 'staging'),
                 'fa-stop': (name === 'disabled'),
                 'fa-clock-o': (name === 'idle'),
                 'fa-frown-o': (name === 'broken')}"></i>
@@ -35,18 +57,13 @@
             </span>
           </div>
           <div class="panel-body" ng-show="counts.show">
-            Panel content
           </div>
-          <!--
-          <div class="panel-footer" ng-show="counts.show">
-          </div>
-          -->
         </div>
       </li>
     </ul>
   </div>
 </div>
-<div class="row text-right">
+<div class="text-right">
   <p>
     <i class="fa fa-camera"></i>
     {{summary.metadata.generated | date:'yyyy-MM-dd HH:mm:ss Z'}} snapshot &nbsp;

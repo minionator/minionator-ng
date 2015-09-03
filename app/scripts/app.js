@@ -24,6 +24,11 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
+      .when('/:class', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        controllerAs: 'main'
+      })
       .when('/:class/:type', {
         templateUrl: 'views/type.html',
         controller: 'TypeCtrl',

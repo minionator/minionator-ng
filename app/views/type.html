@@ -1,10 +1,17 @@
 <div>
   <h1>
-    <i class="fa" ng-class="{
-      'fa-wrench': (class === 'build'),
-      'fa-heartbeat': (class === 'test'),
-      'fa-balance-scale': (class === 'try')}"></i>
-    {{class}}
+    <a ng-href="#/">
+      <i class="fa fa-heartbeat"></i>
+      dash
+    </a>
+    /
+    <a ng-href="#/{{class}}">
+      <i class="fa" ng-class="{
+        'fa-wrench': (class === 'build'),
+        'fa-tachometer': (class === 'test'),
+        'fa-balance-scale': (class === 'try')}"></i>
+      {{class}}
+    </a>
     /
     <i class="fa" ng-class="{
       'fa-windows': (slavetype.indexOf('-2008-') > 0 || slavetype.indexOf('-w') > 0 || slavetype.indexOf('-xp') > 0),
@@ -13,7 +20,10 @@
       'fa-android': (slavetype.indexOf('-emulator') > 0 || slavetype === 'panda')}"></i>
     {{slavetype}}
   </h1>
-  <div ng-repeat="state in ['working', 'idle', 'broken', 'disabled', 'staging', 'decommissioned', 'not_in_slavealloc']" class="clearfix">
+  <div class="text-center" ng-show="!data">
+    <i class="fa fa-spinner fa-spin"></i>
+  </div>
+  <div ng-repeat="state in ['working', 'idle', 'broken', 'disabled', 'staging', 'decommissioned', 'not_in_slavealloc']" class="clearfix" ng-show="data">
     <h2>
       <i class="fa" ng-class="{
         'fa-eraser': (state === 'decommissioned'),
@@ -41,16 +51,6 @@
           <button type="button" class="btn btn-xs btn-default pull-right" ng-click="stats.show = !stats.show">
             <i class="fa" ng-class="{'fa-expand': !stats.show, 'fa-compress': stats.show}"></i>
           </button>
-        <!--
-          <span ng-repeat="(name, count) in counts track by $index" title="{{name}}" ng-show="count && (name !== 'show')" style="margin-right: 4px;" class="label pull-right" ng-class="{
-            'label-success': (name === 'working'),
-            'label-warning': (name === 'disabled'),
-            'label-danger': (name === 'broken'),
-            'label-default': (['broken', 'disabled', 'working'].indexOf() < 0)}">
-            
-            <span class="">{{count}}</span>
-          </span>
-        -->
         </div>
         <div class="panel-body" ng-show="stats.show">
           <div ng-show="stats.elapsed_on_job">
@@ -68,14 +68,7 @@
             {{stats.notes}}
           </div>
         </div>
-        <!--
-        <div class="panel-footer" ng-show="counts.show">
-        </div>
-        -->
       </div>
     </div>
   </div>
 </div>
-<!--
-<pre>{{data | json}}</pre>
--->

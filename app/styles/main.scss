@@ -70,6 +70,12 @@ body {
     margin-top: 28px;
   }
 }
+.navbar-brand {
+  padding: 10px 15px;
+  img {
+    display: inline;
+  }
+}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
