@@ -8,8 +8,17 @@
  * Controller of the minionatorNgApp
  */
 angular.module('minionatorNgApp')
-  .controller('InstanceCtrl', function ($scope, $routeParams) {
-    $scope.class = $routeParams.class;
-    $scope.slavetype = $routeParams.type;
-    $scope.instanceName = $routeParams.instance;
+  .controller('InstanceCtrl', function ($scope, $routeParams, Build) {
+    if ($routeParams.class) {
+      $scope.slaveclass = $routeParams.class;
+    }
+    if ($routeParams.type) {
+      $scope.slavetype = $routeParams.type;
+    }
+    if ($routeParams.instance) {
+      $scope.instanceName = $routeParams.instance;
+      Build.query({hostname: $routeParams.instance}, function (builds) {
+        $scope.builds = builds;
+      });
+    }
   });
